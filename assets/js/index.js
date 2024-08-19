@@ -1,5 +1,5 @@
 try {
-  particlesJS.load('background', '/assets/json/particlesjs.json', function() {
+  particlesJS.load('background', location.href + '/assets/json/particlesjs.json', function() {
     console.log('particles.js config loaded');
   });
 } catch (error) {
