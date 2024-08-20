@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Amplify's Site</title>
     <script src="//cdn.jsdelivr.net/npm/eruda"></script>
     <script>
       eruda.init();
     </script>
-    <link rel="icon" type="icon/x-icon" href="/assets/imgs/favicon.png" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=6.0, user-scalable=yes"
-    />
+    <link rel="icon" type="image/x-icon" href="/assets/imgs/favicon.png" />
     <meta name="description" content="About Me!!!!1!111!1!" />
     <meta
       name="keywords"
@@ -23,11 +21,52 @@
     ></script>
   </head>
   <body>
-    <script src="/assets/js/particles.min.js"></script>
-    <div id="background"></div>
-    <div class="container">
+    <div class="bg-container">
+      <div id="background"></div>
+      <div class="aur_cont">
+        <span class="aur aur_1"></span>
+        <span class="aur aur_2"></span>
+        <span class="aur aur_3"></span>
+        <span class="aur aur_4"></span>
+        <span class="aur aur_5"></span>
+        <span class="aur aur_6"></span>
+        <span class="aur aur_7"></span>
+        <span class="aur aur_8"></span>
+        <span class="aur aur_9"></span>
+        <span class="aur aur_10"></span>
+      </div>
+      <!--<div class="box">
+            <div class="wave -one"></div>
+            <div class="wave -two"></div>
+            <div class="wave -three"></div>
+        </div>-->
+    </div>
+    <div class="nav">
+      <a href="/#/" class="navImage">
+        <img class="navImage" src="/assets/imgs/pfp.jpg" />
+      </a>
+      <hr>
+
+      <a href="/#/" class="navItem material-symbols-outlined" id="indexLink"
+        >home</a
+      >
+      <a
+        href="/#/other"
+        class="navItem material-symbols-outlined"
+        id="otherLink"
+        >more_horiz</a
+      >
+      <a
+        href="/#/projects"
+        class="navItem material-symbols-outlined"
+        id="projectsLink"
+        >storage</a
+      >
+    </div>
+
+    <div class="page" id="index">
       <div class="about-me">
-        <img class="pfp" src="/assets/imgs/pfp.jpg" />
+        <img class="pfp" src="/assets/imgs/pfp.jpg" alt="Profile Picture" />
         <div>
           <h1 class="name">Amplify</h1>
           <p class="definition">
@@ -35,14 +74,13 @@
           </p>
         </div>
         <p class="description">
-          Hello, Im Amplify! Some people call me Amp for short. I do fullstack
+          Hello, I'm Amplify! Some people call me Amp for short. I do fullstack
           web development, and I help run
           <a class="link" href="https://discord.night-x.com">Night Network</a>.
           You can find my Projects on Github, Most of them are under the Night
           Github Organizations, and many of them are unfinished or abandoned.
           Bye!
         </p>
-        <br />
         <div class="socials-container">
           <a href="https://github.com/not-amplify/"
             ><i class="fa-brands fa-github social"></i
@@ -60,6 +98,9 @@
         </div>
       </div>
     </div>
+    <div class="page" id="other"></div>
+    <div class="page" id="projects"></div>
+    <script src="/assets/js/particles.min.js"></script>
     <script src="/assets/js/index.js"></script>
   </body>
 </html>

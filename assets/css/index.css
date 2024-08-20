@@ -1,14 +1,21 @@
-@import url(https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap);
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
+
 :root {
     --bg-color: #000000;
     --text-color: #ffffff;
     --main-color: #ae00ff;
+    --secondary-color: #7700ff;
+    --third-color: #6a00ff;
 }
 
 body {
     background-color: var(--bg-color);
-    width: 100;
-    height: 100;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
 }
 
 #background {
@@ -20,7 +27,217 @@ body {
     z-index: -1;
 }
 
-.container {
+.box {
+    position: fixed;
+    bottom: 35%;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.wave {
+    position: absolute;
+    opacity: 0.4;
+    width: 1500px;
+    height: 1300px;
+    margin-left: -150px;
+    margin-top: -250px;
+    border-radius: 83%;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.wave.-one {
+    animation: rotate 10000ms infinite linear;
+    opacity: 0.05;
+    backdrop-filter: blur(15px);
+    border: 2px solid var(--main-color);
+}
+
+.wave.-two {
+    animation: rotate 6000ms infinite linear;
+    opacity: 0.1;
+    border: 3px solid var(--main-color);
+}
+
+.aur_cont {
+    margin: 35px auto 0;
+    display: table;
+    height: auto;
+    position: fixed;
+    right: 1%;
+    top: 15%;
+}
+
+.aur_cont .aur {
+    transform: skew(-0.06turn, 18deg);
+    display: block;
+    width: 0;
+    min-height: 122px;
+    float: left;
+    margin-left: 100px;
+    border-radius: 5% 52% 30px 20px;
+    opacity: 1;
+}
+
+.aur_cont .aur.aur_1 {
+    box-shadow: var(--secondary-color) 0px 0px 100px 40px;
+    margin-top: 2px;
+    animation: topup 7031ms infinite linear;
+}
+
+.aur_cont .aur.aur_2 {
+    box-shadow: var(--main-color) 0px 0px 100px 40px;
+    margin-top: 27px;
+    animation: topup 10359ms infinite linear;
+}
+
+.aur_cont .aur.aur_3 {
+    box-shadow: var(--secondary-color) 0px 0px 100px 40px;
+    margin-top: 27px;
+    animation: topup 5515ms infinite linear;
+}
+
+.aur_cont .aur.aur_4 {
+    box-shadow: var(--third-color) 0px 0px 100px 40px;
+    margin-top: -30px;
+    animation: topup 11580ms infinite linear;
+}
+
+.aur_cont .aur.aur_5 {
+    box-shadow: var(--secondary-color) 0px 0px 100px 40px;
+    margin-top: 0px;
+    animation: topup 6773ms infinite linear;
+}
+
+.aur_cont .aur.aur_6 {
+    box-shadow: var(--main-color) 0px 0px 100px 40px;
+    margin-top: 45px;
+    animation: topup 8622ms infinite linear;
+}
+
+.aur_cont .aur.aur_7 {
+    box-shadow: var(--third-color) 0px 0px 100px 40px;
+    margin-top: 0px;
+    animation: topup 11510ms infinite linear;
+}
+
+.aur_cont .aur.aur_8 {
+    box-shadow: var(--secondary-color) 0px 0px 100px 40px;
+    margin-top: 5px;
+    animation: topup 10258ms infinite linear;
+}
+
+.aur_cont .aur.aur_9 {
+    box-shadow: var(--main-color) 0px 0px 100px 40px;
+    margin-top: 9px;
+    animation: topup 12160ms infinite linear;
+}
+
+.aur_cont .aur.aur_10 {
+    box-shadow: var(--third-color) 0px 0px 100px 40px;
+    margin-top: -27px;
+    animation: topup 12931ms infinite linear;
+}
+
+@keyframes drift {
+    from {
+        transform: rotate(0deg);
+    }
+
+    from {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes topup {
+
+    0%,
+    100% {
+        transform: translatey(0px);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translatey(150px);
+        opacity: 0.1;
+    }
+
+    25%,
+    75% {
+        opacity: 1;
+    }
+}
+
+@keyframes northern {
+    0% {
+        transform: translate(5%, -2%);
+    }
+
+    25% {
+        transform: translate(10%, 7%);
+    }
+
+    40% {
+        transform: rotate(-10deg);
+    }
+
+    60% {
+        transform: translate(7%, -2%);
+    }
+
+    85% {
+        transform: translate(6%, 3%) rotate(12deg);
+    }
+
+    100% {
+        transform: none;
+    }
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #303030;
+    height: 100%;
+}
+
+.nav * {
+    margin: 2px 4px;
+}
+
+.nav .navImage {
+    width: 26px;
+    height: 26px;
+    margin: 3px 2px;
+    border-radius: 50%;
+}
+
+.nav hr {
+    height: 2px;
+    background: #646464;
+    border: none;
+    margin: 5px 2px;
+} 
+
+.nav .navItem {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 26px;
+}
+
+.page {
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -28,8 +245,8 @@ body {
 }
 
 .about-me {
-    width: 50vw; /* Adjusted to desired width */
-    height: 85vh; /* Adjusted to desired height */
+    width: 50vw;
+    height: 85vh;
     margin: auto;
     border-radius: 14px;
     z-index: 1;
@@ -37,7 +254,7 @@ body {
     backdrop-filter: blur(2px);
     display: flex;
     flex-direction: column;
-    background-color: rgba(128, 128, 128, 0.39); /* Gray color with 70% opacity */
+    background-color: rgba(128, 128, 128, 0.39);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
     align-items: center;
     justify-content: center;
@@ -52,22 +269,23 @@ body {
 .name {
     color: var(--main-color);
     font-size: 30px;
-    font-family: Poppins;
     text-align: center;
     margin-bottom: 2px;
 }
 
-.definition {
+.definition,
+.description {
     color: var(--text-color);
+    text-align: center;
+}
+
+.definition {
     font-size: 12px;
-    font-family: Poppins;
 }
 
 .description {
     margin: 30px;
-    color: var(--text-color);
     font-size: 15px;
-    font-family: Poppins;
 }
 
 .link {
@@ -75,9 +293,11 @@ body {
     color: var(--main-color);
 }
 
-.socials-contianer {
+.socials-container {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    gap: 10px;
 }
 
 .social {
