@@ -192,3 +192,18 @@ createPopup(document.getElementById("light"), `
     <h3 class="subname">Light:</h3>
     <img class="project-image" src="/assets/imgs/projects/light.png" />
 `);
+
+createPopup(document.getElementById("space"), `
+	<h3 class="subname">Space:</h3>
+	<img class="project-image" src="/assets/imgs/projects/space.jpeg" />
+`)
+
+createPopup(document.getElementById("elysium"), `
+	<h3 class="subname">Elysium:</h3>
+	<h1 class="in-progress">IN PROGRESS</h1>
+`)
+
+createPopup(document.getElementById("vibrance"), `
+	<h3 class="subname">Vibrance Tabs System:</h3>
+	<h1 class="in-progress">IN PROGRESS</h1>
+`)
