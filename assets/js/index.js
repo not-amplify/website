@@ -203,7 +203,7 @@ createPopup(document.getElementById("elysium"), `
 	<h1 class="in-progress">IN PROGRESS</h1>
 `)
 
-createPopup(document.getElementById("vibrance"), `
-	<h3 class="subname">Vibrance Tabs System:</h3>
+createPopup(document.getElementById("daydream"), `
+	<h3 class="subname">DayDream X Tabs System:</h3>
 	<h1 class="in-progress">IN PROGRESS</h1>
 `)
