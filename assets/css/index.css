@@ -375,6 +375,14 @@ img {
     gap: 10px;
 }
 
+.socials-container hr {
+    height: 100%;
+    width: 2px;
+    background: #929292;
+    border: none;
+    margin: 0px 4px;
+}
+
 .social {
     margin: 2px;
     color: var(--text-color);
