@@ -266,10 +266,21 @@ img {
     backdrop-filter: blur(2px);
     display: flex;
     flex-direction: column;
-    background-color: rgba(128, 128, 128, 0.39);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
     align-items: center;
     justify-content: center;
+}
+
+.about-me * {
+    z-index: 0;
+}
+
+.about-me .header {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    height: auto;
 }
 
 .container {
@@ -282,12 +293,27 @@ img {
     backdrop-filter: blur(2px);
     display: flex;
     flex-direction: column;
-    background-color: rgba(128, 128, 128, 0.39);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
     align-items: center;
     justify-content: center;
 }
 
+.container * {
+    z-index: 0;
+}
+
+.container .header {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    height: auto;
+}
+
+
+.container .name {
+    color: var(--text-color);
+}
 .popup {
     width: 100vw;
     height: 100vh;
@@ -295,10 +321,10 @@ img {
     border-radius: 14px;
     z-index: 5;
     overflow: hidden;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(15px);
     display: flex;
     flex-direction: column;
-    background-color: rgba(128, 128, 128, 0.39);
+    background-color: rgba(255, 255, 255, 0);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
     align-items: center;
     justify-content: center;
@@ -313,7 +339,7 @@ img {
     border: none;
     border-radius: 30px;
     box-shadow: none;
-    background-color: rgba(128, 128, 128, 0.19);
+    background-color: rgba(114, 114, 114, 0.233);
     color: var(--text-color);
     display: flex;
     justify-content: center;
@@ -405,7 +431,7 @@ img {
 }
 
 .project:hover {
-    color: var(--main-color);
+    color: var(--secondary-color);
 }
 
 .project-image {

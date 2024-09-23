@@ -198,33 +198,7 @@ createPopup(document.getElementById("space"), `
 	<img class="project-image" src="/assets/imgs/projects/space.jpeg" />
 `)
 
-createPopup(document.getElementById("daylight"), `
-	<h3 class="subname">Daylight (Proxathon 2024):</h3>
-	<img class="project-image" src="/assets/imgs/projects/daylight.png" />
-`)
-
-createPopup(document.getElementById("umbra"), `
-	<h3 class="subname">Umbra MP3 Player:</h3>
-	<h4 class="description" style="margin: 0px 30px;">IN PROGRESS</h4>
-	<img class="project-image" src="/assets/imgs/projects/umbra.png" />
-`)
-
-createPopup(document.getElementById("elysium"), `
-	<h3 class="subname">Elysium(Previously known Smartify):</h3>
-	<h4 class="description" style="margin: 0px 30px;">IN PROGRESS</h4>
-	<img class="project-image" src="/assets/imgs/projects/elysium.png" />
-`)
-
-createPopup(document.getElementById("daydream"), `
-	<h3 class="subname">DayDream X Tabs System:</h3>
-	<h1 class="in-progress">IN PROGRESS</h1>
-`)
-
-createPopup(document.getElementById("gloom"), `
-	<h3 class="subname">Gloom Interception Proxy:</h3>
-	<h1 class="in-progress">IN PROGRESS</h1>
-`)
-createPopup(document.getElementById("eclipse"), `
-	<h3 class="subname">Eclipse webOS:</h3>
-	<h1 class="in-progress">IN PROGRESS</h1>
-`)
+createPopup( document.getElementById("night"), `
+<h3 class="subname">Night Portfolio:</h3>
+<img class="project-image" src="/assets/imgs/projects/night.png" />
+<p class="description">For more projects thast we're working on, look <a href="https://night-x.com" class="link">here</a></p>`)
