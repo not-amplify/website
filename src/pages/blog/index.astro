@@ -1,0 +1,44 @@
+---
+import Layout from "../../layouts/Layout.astro";
+const postImporters = import.meta.glob("./*.md");
+
+const loadedPosts = await Promise.all(
+  Object.entries(postImporters).map(async ([path, resolver]) => {
+    const post: any = await resolver();
+    return {
+      url: path.replace("./", "/blog/").replace(".md", ""),
+      title: post.frontmatter.title,
+      description: post.frontmatter.description,
+      date: new Date(post.frontmatter.pubDate),
+    };
+  })
+);
+
+const sortedPosts = loadedPosts.sort(
+  (a, b) => b.date.getTime() - a.date.getTime()
+);
+---
+
+<Layout>
+  <div class="flex flex-col items-center gap-4 mb-4">
+    <h1 class="text-4xl font-bold mb-6">Blog Posts</h1>
+
+    <div class="flex flex-col gap-4 space-y-6">
+      {
+        sortedPosts.map((post) => (
+          <div class="bg-rosepine-surface border border-rosepine-highlightLow rounded-xl shadow transition hover:border-rosepine-iris p-3">
+            <a href={post.url} class="block">
+              <h2 class="text-2xl font-semibold text-rosepine-iris hover:text-rosepine-love">
+                {post.title}
+              </h2>
+              <p class="text-sm text-rosepine-muted">
+                {post.date.toLocaleDateString()}
+              </p>
+              <p class="mt-2 text-rosepine-subtle">{post.description}</p>
+            </a>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,24 @@
+---
+import Background from "../components/Background.astro"
+import Nav from "../components/Nav.astro"
+import { ClientRouter } from "astro:transitions";
+
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/res/me.jpg" />
+		<title>Portfolio ig</title>
+		<ClientRouter transition:animate="fade"/>
+	</head>
+	<body class="overflow-hidden w-screen h-screen m-0 bg-rosepine-base text-rosepine-text">
+		<Background />
+		<Nav />
+		<div class="flex items-center justify-center overflow-hidden w-screen h-screen m-0">
+			<slot />
+		</div>
+	</body>
+</html>

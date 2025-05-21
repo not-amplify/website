@@ -1,0 +1,27 @@
+---
+---
+
+<div class="fixed bg-rosepine-surface text-rosepine-text rounded-md shadow-lg p-3 max-w-xl w-fit backdrop-blur-md border border-rosepine-highlightLow bottom-0 left-0 right-0 mx-auto mb-2 flex items-center justify-center gap-4">
+    <a class="text-rosepine-subtle hover:text-rosepine-iris" href="/">
+        <span data-lucide="home"></span>
+    </a>
+    <a class="text-rosepine-subtle hover:text-rosepine-iris" href="/projects">
+        <span data-lucide="code"></span>
+    </a>
+    <a class="text-rosepine-subtle hover:text-rosepine-iris" href="/blog">
+        <span data-lucide="book"></span>
+    </a>
+</div>
+
+<script>
+    import { createIcons, icons } from "lucide";
+
+    createIcons({ icons });
+
+    document.addEventListener("astro:page-load", () => {
+        createIcons({ icons });
+    });
+    document.addEventListener("astro:after-swap", () => {
+        createIcons({ icons });
+    });
+</script>

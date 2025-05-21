@@ -1,0 +1,118 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Overlay from "../components/Overlay.astro";
+---
+
+<Layout>
+  <Overlay>
+    <div class="flex items-center gap-4 mb-4">
+      <img src="/res/me.jpg" alt="Avatar" class="w-20 h-20 rounded-2xl" />
+      <div>
+        <h1 class="text-xl font-semibold hover:text-rosepine-iris">
+          Amplify <span class="text-rosepine-muted text-md">(he/him)</span>
+        </h1>
+        <div>
+          <p
+            id="typewriter"
+            class="text-sm text-rosepine-muted font-mono inline-block whitespace-nowrap overflow-hidden animate-blink-caret"
+          >
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-grow flex-row gap-2 justify-end">
+        <a
+          class="text-rosepine-iris hover:text-rosepine-love"
+          href="https://github.com/not-amplify"
+          ><span data-lucide="github"></span></a
+        >
+        <a
+          class="text-rosepine-iris hover:text-rosepine-love"
+          href="https://discord.com/users/1199165998998245377"
+          ><span data-lucide="at-sign"></span></a
+        >
+        <a
+          class="text-rosepine-iris hover:text-rosepine-love"
+          href="https://www.instagram.com/not.amplify.dev/"
+          ><span data-lucide="instagram"></span></a
+        >
+        <a
+          class="text-rosepine-iris hover:text-rosepine-love"
+          href="https://night-x.com/"><span data-lucide="moon"></span></a
+        >
+      </div>
+    </div>
+    <p class="text-sm text-rosepine-text">
+      Hello! My name is Amplify, but you can call me Amp. I do full-stack
+      development as a hobby and love messing around with tech. I run an
+      organization called <a
+        class="font-bold text-rosepine-iris hover:text-rosepine-love"
+        >Night Network</a
+      >. You can check out my <a
+        href="/projects"
+        class="font-bold text-rosepine-iris hover:text-rosepine-love"
+        >projects</a
+      >, read my <a
+        href="/blog"
+        class="font-bold text-rosepine-iris hover:text-rosepine-love">blog</a
+      >. I made this site in Astro & TailwindCSS, with a Rose Pine theme.
+    </p>
+  </Overlay>
+</Layout>
+
+<script>
+  import { createIcons, icons } from "lucide";
+
+  createIcons({ icons });
+
+  document.addEventListener("astro:page-load", () => {
+    createIcons({ icons });
+  });
+  document.addEventListener("astro:after-swap", () => {
+    createIcons({ icons });
+  });
+</script>
+<script>
+let titles = [
+  "Fullstack Developer",
+  "Software Engineer",
+  "HS Sophomore",
+  "Linux Enthusiast",
+];
+
+let el = null;
+let titleIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let timeoutId: any = null;
+
+function type() {
+  const current = titles[titleIndex];
+  const displayed = current.substring(0, charIndex);
+  el!.textContent = displayed;
+
+  if (!isDeleting && charIndex < current.length) {
+    charIndex++;
+    timeoutId = setTimeout(type, 100);
+  } else if (isDeleting && charIndex > 0) {
+    charIndex--;
+    timeoutId = setTimeout(type, 50);
+  } else {
+    isDeleting = !isDeleting;
+    if (!isDeleting) titleIndex = (titleIndex + 1) % titles.length;
+    timeoutId = setTimeout(type, 1500);
+  }
+}
+
+function startTyping() {
+  if (timeoutId) clearTimeout(timeoutId);
+  el = document.getElementById("typewriter");
+  if (!el) return;
+  titleIndex = 0;
+  charIndex = 0;
+  isDeleting = false;
+  type();
+}
+
+document.addEventListener("astro:page-load", startTyping);
+document.addEventListener("astro:after-swap", startTyping);
+</script>
