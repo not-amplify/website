@@ -26,9 +26,9 @@ const sortedPosts = loadedPosts.sort(
     <div class="flex flex-col gap-4 space-y-6">
       {
         sortedPosts.map((post) => (
-          <div class="bg-rosepine-surface border border-rosepine-highlightLow rounded-xl shadow transition hover:border-rosepine-iris p-3">
+          <div class="bg-rosepine-surface border border-rosepine-highlightLow rounded-xl shadow transition hover:border-rosepine-foam p-3">
             <a href={post.url} class="block">
-              <h2 class="text-2xl font-semibold text-rosepine-iris hover:text-rosepine-love">
+              <h2 class="text-2xl font-semibold text-rosepine-iris hover:text-rosepine-foam">
                 {post.title}
               </h2>
               <p class="text-sm text-rosepine-muted">

@@ -1,8 +1,16 @@
 ---
+export interface Props {
+  enableBg?: boolean;
+  customClasses?: string;
+}
+
+const { enableBg = true, customClasses = "" } = Astro.props;
+
+const bgClass = enableBg ? "bg-rosepine-surface backdrop-blur-md border border-rosepine-highlightLow shadow-lg" : "";
 ---
 
 <div
-    class="bg-rosepine-surface text-rosepine-text rounded-xl shadow-lg p-6 max-w-3xl w-full backdrop-blur-md border border-rosepine-highlightLow"
+    class={`text-rosepine-text rounded-xl p-6 ${bgClass} ${customClasses}`}
   >
   <slot />
 </div>

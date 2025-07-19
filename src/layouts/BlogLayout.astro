@@ -16,7 +16,7 @@ import Layout from "./Layout.astro";
     class="fixed bg-rosepine-surface text-rosepine-text rounded-xl top-4 p-3 max-w-xl w-fit mx-auto flex gap-2 items-center justify-between"
   >
     <a
-      class="text-rosepine-subtle hover:text-rosepine-iris"
+      class="text-rosepine-subtle hover:text-rosepine-foam"
       href="/blog"
     >
       <span data-lucide="arrow-left"></span>
@@ -30,16 +30,3 @@ import Layout from "./Layout.astro";
     <slot />
   </article>
 </Layout>
-
-<script>
-  import { createIcons, icons } from "lucide";
-
-  createIcons({ icons });
-
-  document.addEventListener("astro:page-load", () => {
-    createIcons({ icons });
-  });
-  document.addEventListener("astro:after-swap", () => {
-    createIcons({ icons });
-  });
-</script>
