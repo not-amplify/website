@@ -1,0 +1,267 @@
+---
+// Discord Activity Component (icons with sliding text)
+---
+
+<div
+    id="discord-activities"
+    class="mt-4 p-3 border border-rosepine-highlightLow rounded-lg bg-rosepine-surface/50"
+>
+    <div class="flex items-center gap-2 mb-3">
+        <h3 class="text-sm font-semibold text-rosepine-text">Discord Activity</h3>
+    </div>
+    
+    <div id="discord-icons-container" class="flex items-center gap-2 flex-wrap">
+        <div class="text-xs text-rosepine-muted">Loading...</div>
+    </div>
+</div>
+
+<!-- Status indicator and text that will be positioned elsewhere -->
+
+<script>
+    interface SpotifyData {
+        song: string;
+        artist: string;
+        album: string;
+        album_art_url: string;
+        timestamps: {
+            start: number;
+            end: number;
+        };
+    }
+
+    interface Activity {
+        name: string;
+        type: number;
+        details?: string;
+        state?: string;
+        timestamps?: {
+            start: number;
+        };
+    }
+
+    interface DiscordData {
+        discord_status: string;
+        listening_to_spotify: boolean;
+        spotify?: SpotifyData;
+        activities: Activity[];
+    }
+
+    const statusColors = {
+        online: "bg-green-500",
+        idle: "bg-yellow-500",
+        dnd: "bg-red-500",
+        offline: "bg-gray-500",
+    };
+
+    async function fetchDiscordStatus() {
+        try {
+            const response = await fetch(
+                "https://api.lanyard.rest/v1/users/1199165998998245377",
+            );
+            const data = await response.json();
+
+            if (data.success) {
+                await updateDiscordStatus(data.data);
+            }
+        } catch (error) {
+            console.error("Failed to fetch Discord status:", error);
+            document.getElementById("discord-content")!.innerHTML =
+                "Failed to load Discord status";
+        }
+    }
+
+    async function updateDiscordStatus(data: DiscordData) {
+        const statusIndicator = document.getElementById(
+            "discord-status-indicator",
+        );
+        const statusText = document.getElementById("discord-status-text");
+        const profileStatusDot = document.getElementById("profile-status-dot");
+        const profileStatusTooltip = document.getElementById(
+            "profile-status-tooltip",
+        );
+        const iconsContainer = document.getElementById("discord-icons-container")!;
+
+        const statusColorClass =
+            statusColors[data.discord_status as keyof typeof statusColors] ||
+            statusColors.offline;
+        const statusMap = {
+            online: "Online",
+            idle: "Away",
+            dnd: "Do Not Disturb",
+            offline: "Offline",
+        };
+        const statusDisplayText =
+            statusMap[data.discord_status as keyof typeof statusMap] ||
+            "Unknown";
+
+        // Update status indicator in the component (if it exists)
+        if (statusIndicator) {
+            statusIndicator.className = `w-4 h-4 rounded-full border-2 border-rosepine-base absolute ${statusColorClass}`;
+            statusIndicator.classList.remove("hidden");
+        }
+
+        // Update status text in the component (if it exists)
+        if (statusText) {
+            statusText.textContent = statusDisplayText;
+            statusText.classList.remove("hidden");
+        }
+
+        // Update profile status dot
+        if (profileStatusDot) {
+            profileStatusDot.className = `absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-rosepine-base cursor-pointer group ${statusColorClass}`;
+        }
+
+        // Update profile status tooltip
+        if (profileStatusTooltip) {
+            profileStatusTooltip.textContent = statusDisplayText;
+            // Don't remove hidden class - let CSS hover handle visibility
+        }
+
+        let content = "";
+
+        // Create Spotify activity if listening
+        if (data.listening_to_spotify && data.spotify) {
+            const timeLeft = data.spotify.timestamps.end - Date.now();
+            const minutes = Math.floor(timeLeft / 60000);
+            const seconds = Math.floor((timeLeft % 60000) / 1000);
+
+            content += `
+                <div class="group relative cursor-pointer">
+                    <!-- Icon/Cover Art -->
+                    <div class="w-10 h-10 flex-shrink-0 rounded-lg overflow-hidden relative z-10 hover:scale-105 transition-transform duration-200">
+                        <img src="${data.spotify.album_art_url}" alt="Album Art" class="w-full h-full object-cover" />
+                    </div>
+                    <!-- Sliding text container (slides down from icon) -->
+                    <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 z-20">
+                        <div class="bg-rosepine-surface border border-rosepine-highlightLow rounded-lg px-3 py-2 transform scale-y-0 origin-top group-hover:scale-y-100 transition-transform duration-300 ease-out whitespace-nowrap shadow-lg">
+                            <div class="text-green-400 font-medium text-xs">${data.spotify.song}</div>
+                            <div class="text-rosepine-muted text-xs">by ${data.spotify.artist}</div>
+                            ${timeLeft > 0 ? `<div class="text-xs text-rosepine-muted">${minutes}:${seconds.toString().padStart(2, "0")} left</div>` : ""}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Create other activities (filter out Spotify since we handle it separately)
+        const otherActivities = data.activities.filter(
+            (activity) => activity.name !== "Spotify",
+        );
+
+        if (otherActivities.length > 0) {
+            otherActivities.forEach((activity) => {
+                const icon = getActivityIcon(activity.name);
+                const timeElapsed = activity.timestamps?.start
+                    ? formatElapsedTime(Date.now() - activity.timestamps.start)
+                    : "";
+
+                content += `
+                    <div class="group relative cursor-pointer">
+                        <!-- Icon -->
+                        <div class="w-10 h-10 flex-shrink-0 bg-rosepine-highlightMed rounded-lg flex items-center justify-center relative z-10 hover:scale-105 transition-transform duration-200">
+                            <span data-lucide="${icon}" class="w-5 h-5 text-rosepine-iris"></span>
+                        </div>
+                        <!-- Sliding text container (slides down from icon) -->
+                        <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 z-20">
+                            <div class="bg-rosepine-surface border border-rosepine-highlightLow rounded-lg px-3 py-2 transform scale-y-0 origin-top group-hover:scale-y-100 transition-transform duration-300 ease-out whitespace-nowrap shadow-lg">
+                                <div class="text-rosepine-text font-medium text-xs">${activity.name}</div>
+                                ${activity.details ? `<div class="text-rosepine-muted text-xs">${activity.details}</div>` : ""}
+                                ${activity.state ? `<div class="text-rosepine-muted text-xs">${activity.state}</div>` : ""}
+                                ${timeElapsed ? `<div class="text-xs text-rosepine-muted">${timeElapsed}</div>` : ""}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        if (!content) {
+            content = '<div class="text-rosepine-muted text-xs">No current activity</div>';
+        }
+
+        iconsContainer.innerHTML = content;
+
+        // Re-initialize Lucide icons using the same method as Layout
+        const { createIcons, icons } = await import("lucide");
+        createIcons({ icons });
+    }
+
+    function getActivityIcon(activityName: string): string {
+        const iconMap: { [key: string]: string } = {
+            "Visual Studio Code": "code",
+            "VS Code": "code",
+            Spotify: "music",
+            Chrome: "chrome",
+            "Google Chrome": "chrome",
+            Firefox: "firefox",
+            "Mozilla Firefox": "firefox",
+            Discord: "message-circle",
+            Steam: "gamepad-2",
+            Figma: "figma",
+            Photoshop: "image",
+            "Adobe Photoshop": "image",
+            OBS: "video",
+            "OBS Studio": "video",
+            Notion: "file-text",
+            "IntelliJ IDEA": "code",
+            WebStorm: "code",
+            PyCharm: "code",
+            Sublime: "code",
+            "Sublime Text": "code",
+            Atom: "code",
+            Vim: "terminal",
+            Neovim: "terminal",
+            Terminal: "terminal",
+            "Windows Terminal": "terminal",
+            iTerm2: "terminal",
+            Slack: "message-square",
+            Teams: "users",
+            "Microsoft Teams": "users",
+            Zoom: "video",
+            "Zoom Meeting": "video",
+            GitHub: "github",
+            "GitHub Desktop": "github",
+            GitKraken: "git-branch",
+            Docker: "container",
+            "Docker Desktop": "container",
+            Postman: "zap",
+            Insomnia: "moon",
+            Blender: "box",
+            Unity: "gamepad",
+            "Unreal Engine": "gamepad",
+            YouTube: "play",
+            Netflix: "play",
+            Twitch: "tv",
+            "League of Legends": "gamepad-2",
+            Minecraft: "box",
+            Valorant: "target",
+            "Counter-Strike": "crosshair",
+            "World of Warcraft": "sword",
+        };
+
+        return iconMap[activityName] || "activity";
+    }
+
+    function formatElapsedTime(ms: number): string {
+        const hours = Math.floor(ms / 3600000);
+        const minutes = Math.floor((ms % 3600000) / 60000);
+
+        if (hours > 0) {
+            return `${hours}h ${minutes}m`;
+        } else if (minutes > 0) {
+            return `${minutes}m`;
+        } else {
+            return "Just started";
+        }
+    }
+
+    // Initial fetch
+    fetchDiscordStatus();
+
+    // Update every 30 seconds
+    setInterval(fetchDiscordStatus, 30000);
+
+    // Handle page navigation
+    document.addEventListener("astro:page-load", fetchDiscordStatus);
+    document.addEventListener("astro:after-swap", fetchDiscordStatus);
+</script>

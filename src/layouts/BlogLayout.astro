@@ -3,30 +3,226 @@ export interface Props {
   frontmatter: {
     title: string;
     pubDate: string;
+    description?: string;
   };
 }
 
 const { frontmatter } = Astro.props;
 import Layout from "./Layout.astro";
-;
 ---
 
 <Layout>
-  <div
-    class="fixed bg-rosepine-surface text-rosepine-text rounded-xl top-4 p-3 max-w-xl w-fit mx-auto flex gap-2 items-center justify-between"
-  >
-    <a
-      class="text-rosepine-subtle hover:text-rosepine-foam"
-      href="/blog"
+  <div class="h-full w-full overflow-y-auto flex flex-col items-center">
+    <div
+      class="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-rosepine-surface/95 backdrop-blur-sm text-rosepine-text rounded-xl p-3 max-w-xl w-[calc(100%-2rem)] flex gap-3 items-center justify-between border border-rosepine-highlightLow shadow-lg"
     >
-      <span data-lucide="arrow-left"></span>
-    </a>
-    <h1 class="text-2xl font-bold mb-2">{frontmatter.title}</h1>
-  </div>
+      <a
+        class="text-rosepine-subtle hover:text-rosepine-foam shrink-0"
+        href="/blog"
+      >
+        <span data-lucide="arrow-left"></span>
+      </a>
+      <h1 class="text-lg font-bold truncate">{frontmatter.title}</h1>
+    </div>
 
-  <article
-    class="max-w-3xl mx-auto bg-rosepine-surface p-6 rounded-xl shadow-md border border-rosepine-highlightLow"
-  >
-    <slot />
-  </article>
+    <article
+      class="max-w-3xl w-full mx-auto bg-rosepine-surface p-6 pt-20 pb-12 rounded-xl shadow-md border border-rosepine-highlightLow mt-20 mb-8"
+    >
+      <slot />
+    </article>
+  </div>
 </Layout>
+
+<style is:global>
+  article h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #e0def4;
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  article h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #c4a7e7;
+    margin-bottom: 0.75rem;
+    margin-top: 1.5rem;
+    border-bottom: 1px solid #44415a;
+    padding-bottom: 0.5rem;
+  }
+
+  article h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #ea9a97;
+    margin-bottom: 0.5rem;
+    margin-top: 1.25rem;
+  }
+
+  article h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #9ccfd8;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  article p {
+    color: #e0def4;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+
+  article a {
+    color: #c4a7e7;
+    text-decoration: underline;
+    text-decoration-color: #908caa;
+    transition: color 0.2s;
+  }
+
+  article a:hover {
+    color: #9ccfd8;
+    text-decoration-color: #9ccfd8;
+  }
+
+  article strong {
+    color: #f6c177;
+    font-weight: 700;
+  }
+
+  article em {
+    color: #ea9a97;
+    font-style: italic;
+  }
+
+  article ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  article ol {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  article li {
+    color: #e0def4;
+    line-height: 1.75;
+    margin-bottom: 0.25rem;
+  }
+
+  article li::marker {
+    color: #908caa;
+  }
+
+  article blockquote {
+    border-left: 4px solid #c4a7e7;
+    background: #2a283e;
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+    border-radius: 0 0.5rem 0.5rem 0;
+    font-style: italic;
+    color: #908caa;
+  }
+
+  article blockquote p {
+    margin-bottom: 0;
+    color: #908caa;
+  }
+
+  article hr {
+    border: 0;
+    height: 1px;
+    background: #44415a;
+    margin: 2rem 0;
+  }
+
+  article pre {
+    background: #1f1d2e;
+    border: 1px solid #44415a;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    overflow-x: auto;
+    margin-bottom: 1.25rem;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  article code {
+    background: #393552;
+    color: #f6c177;
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.375rem;
+    font-size: 0.875em;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  article pre code {
+    background: transparent;
+    color: #e0def4;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+  }
+
+  article img {
+    border-radius: 0.75rem;
+    border: 1px solid #44415a;
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
+  }
+
+  article table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    border: 1px solid #44415a;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  article thead {
+    background: #2a283e;
+  }
+
+  article th {
+    color: #c4a7e7;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #44415a;
+  }
+
+  article td {
+    color: #e0def4;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #2a283e;
+  }
+
+  article tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Scrollbar styling */
+  article pre::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  article pre::-webkit-scrollbar-track {
+    background: #1f1d2e;
+    border-radius: 0 0 0.75rem 0.75rem;
+  }
+
+  article pre::-webkit-scrollbar-thumb {
+    background: #44415a;
+    border-radius: 4px;
+  }
+
+  article pre::-webkit-scrollbar-thumb:hover {
+    background: #56526e;
+  }
+</style>
